@@ -77,7 +77,8 @@ collab-a:
 postdoc-a:
     display_name: "Katherine Van Koevering"
     role: postdoc
-    webpage: "https://www.cs.cornell.edu/~kvank/"
+    webpage: https://ktvank.github.io/
+    image: /img/people/katherinevankoevering.jpg"
 
 master-b:
     display_name: "Sandesh Rangreji"
