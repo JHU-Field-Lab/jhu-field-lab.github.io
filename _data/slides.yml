@@ -1,6 +1,8 @@
-- image: /img/people/scott.png
-  alt: "Fieldlab in Miami, EMNLP 2025"
-- image: /img/people/storm.png
-  alt: "Lab team presenting at a conference"
-# - image: /assets/images/slide3.jpg
-#   alt: "Microscope sample analysis"
+- image: /img/slideshow/2025_semester-kickoff.jpg
+  alt: "Kick off the fall semester!"
+- image: /img/slideshow/2024_emnlp.jpg
+  alt: "Fieldlab in Miami, EMNLP 2024"
+- image: /img/slideshow/luna_in_lab_cropped.PNG
+  alt: "Luna leading our lab meeting."
+- image: /img/slideshow/2024_xmas.jpg
+  alt: "Fieldlab at CS winter celebration, 2024"
