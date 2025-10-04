@@ -3,6 +3,7 @@
 
 $gray: #999;
 $light-gray: #EEE;
+$black: #000;
 
 /* Space out content a bit */
 body {
@@ -31,9 +32,24 @@ body {
 .fa {
     color: $gray;
 }
+.fa-github { color: #181717; }     /* GitHub black */
+.fa-linkedin { color: #0A66C2; }   /* LinkedIn blue */
+.fa-globe { color: #406fe6; }      /* Website icon black */
+
 a > .fa {
     // make sure that font-awesome icons are underlined in links
     display: inline;
+}
+
+.social-icons {
+    display: inline-flex;
+    gap: 0.4em; /* space between icons */
+    margin-left: 0.3em; /* space from the name */
+    vertical-align: middle;
+
+    a {
+        text-decoration: none;
+    }
 }
 
 /* /\* Customize container *\/ */
@@ -54,8 +70,9 @@ a > .fa {
 /* Group logo */
 #logo {
     width: 154px;
-    height: 35px;
     margin: 2px 0 8px 0;
+    border-radius: 6px;
+    background: #fff;
 }
 
 /* Front page news. */
@@ -125,7 +142,7 @@ section {
     }
 
     .bio {
-        color: $gray;
+        color: $black;
     }
 
     .person-name {

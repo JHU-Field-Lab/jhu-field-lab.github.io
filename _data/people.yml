@@ -2,51 +2,100 @@
 prof-a:
     display_name: "Anjalie Field"
     webpage: "https://anjalief.github.io/"
+    image: /img/people/anjaliefield.jpg
     role: faculty
+
+grad-d:
+    display_name: "(Robert) Cole Molloy"
+    image: /img/people/colemolloy.JPG
+    role: grad
+
+grad-e:
+    display_name: "Jonathan Ivey"
+    webpage: "https://jonathanivey.github.io/"
+    image: /img/people/jonathanivey.jpeg
+    github: "jonathanivey"
+    role: grad
+    coadvised: "Co-advisor: Ziang Xiao"
 
 grad-a:
     display_name: "Krithika Ramesh"
+    github: "kr-ramesh"
+    image: /img/people/krithikaramesh.jpg
+    webpage: "https://kr-ramesh.github.io/"
     role: grad
 
 grad-b:
-    display_name: "Jamie Rosas-Smith"
+    display_name: "Mian Zhong"
+    image: /img/people/mianzhong.JPG
+    github: "mianzg"
     role: grad
 
 grad-c:
-    display_name: "Mian Zhong"
-    role: grad
-
-alum-a:
-    display_name: ""
-    role: alum
-    bio: ""
-
-collab-a:
-    display_name: ""
-    role: collab
-master-a:
-    display_name: "Pulkit Madaan"
-    role: master
-master-b:
-    display_name: "Moksh Shukla"
-    role: master
-master-c:
-    display_name: "Pristina Wang"
-    role: master
-master-d:
-    display_name: "Taryn Wong"
-    role: master    
-ugrad-a:
     display_name: "Zihao Zhao"
-    role: ugrad
-ugrad-b:
-    display_name: "Rojin Ziaei"
-    role: ugrad
+    webpage: "https://zzhao71.github.io/"
+    image: /img/people/zihaozhao.jpg
+    github: "zzhao71"
+    role: grad
+    coadvised: "Co-advisor: Yinzhi Cao"
+
+master-alum-c:
+    display_name: "Pristina Wang"
+    role: alum
+    bio: "MS @ JHU -> Amazon"
+
+master-alum-b:
+    display_name: "Moksh Shukla"
+    role: alum
+    bio: "MS @ JHU -> American Express"
+
+master-alum-a:
+    display_name: "Pulkit Madaan"
+    role: alum
+    bio: "MS @ JHU -> Google"
+
+master-alum-d:
+    display_name: "Taryn Wong"
+    role: alum
+    bio: "MS @ JHU"
 
 ugrad-alum-a:
-    display_name: "Past Ugrad A"
-    role: ugrad-alum
+    display_name: "Rojin Ziaei"
+    role: alum
+    bio: "UG @ UMD -> Capital One"
 
-ugrad-alum-b:
-    display_name: "Past Ugrad Student B With Long Name"
-    role: ugrad-alum
+alum-a:
+    display_name: "Jamie Rosas-Smith"
+    role: alum
+    bio: "PhD @ JHU"
+
+collab-a:
+    display_name: "Kaavya C"
+    role: collab
+    bio: "PhD @ JHU"
+
+postdoc-a:
+    display_name: "Katherine Van Koevering"
+    role: postdoc
+    webpage: https://ktvank.github.io/
+    image: /img/people/katherinevankoevering.jpg"
+
+master-b:
+    display_name: "Sandesh Rangreji"
+    github: "https://github.com/SandeshRangreji"
+    image: /img/people/sandeshrangreji.jpeg
+    role: master
+
+master-a:
+    display_name: "Yaxuan Ren"
+    image: /img/people/ashleyren.jpg
+    role: master
+
+#ugrad-a:
+#    display_name: "Placeholder"
+#    role: ugrad
+
+
+#ugrad-alum-b:
+#    display_name: "Past Ugrad Student B With Long Name"
+#    role: ugrad-alum

@@ -1,30 +1,29 @@
-
-{% assign person = include.person %}
-
-{% comment %}
-
-Usage:
-
-{% for item in site.data.people %}
-    {% assign person = item[1] %}
-    {% if person.role == role.key %}
-        {% include person.html person=person image=true %}
-    {% endif %}
-{% endfor %}
-
-Use the image parameter to include or not include an image.
-
-Note that pl-0 just removes the left padding from the name part that is put
-there by default by Bootstrap columns.
-
-{% endcomment %}
-
-{% if person.webpage %}
+{% if person.name %}
     {% capture name %}
-        <a href="{{ person.webpage | escape }}"> {{ person.display_name }} </a>
+        <a>{{ person.display_name }}</a>
     {% endcapture %}
 {% else %}
     {% assign name = person.display_name %}
+{% endif %}
+
+{% assign social_icons = "" %}
+
+{% if person.github %}
+    {% capture social_icons %}
+        {{ social_icons }}
+        <a href="https://github.com/{{ person.github | escape }}" target="_blank" rel="noopener" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+    {% endcapture %}
+{% endif %}
+
+{% if person.webpage %}
+    {% capture social_icons %}
+        {{ social_icons }}
+        <a href="{{ person.webpage | escape }}" target="_blank" rel="noopener" title="Website">
+            <i class="fas fa-globe"></i>
+        </a>
+    {% endcapture %}
 {% endif %}
 
 {% if include.image %}
@@ -33,17 +32,42 @@ there by default by Bootstrap columns.
             {% include person-image.html person=person %}
         </div>
         <div class="col pl-0">
-            <h6 class="person-name"> {{ name }} </h6>
+            <h6 class="person-name">
+                {{ name }}
+                <span class="social-icons">
+                    {{ social_icons }}
+                </span>
+            </h6>
+                {% if person.coadvised %}
+                    <div style="color: #888; font-size: 0.95em; margin-bottom: 4px;">
+                        {{ person.coadvised }}
+                    </div>
+                {% endif %}
             {% if person.bio %}
-                <div class="bio">{{person.bio}}</div>
+                <div class="bio">{{ person.bio }}</div>
             {% endif %}
         </div>
     </div>
 {% else %}
     <div class="person person-without-image">
-        {{ name }}
-        {% if person.bio %}
-            <span class="bio">{{person.bio}}</span>
+        {% if person.role == "alum" and person.bio %}
+            <div style="display: flex; align-items: center;">
+                <div style="min-width: 160px; text-align: left;">{{ name }}</div>
+                <div style="margin-left: 16px; color: #444; font-size: 0.98em; font-style: italic;">{{ person.bio }}</div>
+            </div>
+        {% else %}  
+            {{ name }}
+            <span class="social-icons">
+                {{ social_icons }}
+            </span>
+            {% if person.coadvised %}
+                <span style="color: #888; font-size: 0.95em; margin-bottom: 4px;">
+                    {{ person.coadvised }}
+                </span>
+            {% endif %}
+            {% if person.bio %}
+                <span class="bio">{{ person.bio }}</span>
+            {% endif %}
         {% endif %}
     </div>
 {% endif %}

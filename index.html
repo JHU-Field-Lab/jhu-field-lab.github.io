@@ -5,66 +5,98 @@ notitle: true
 
 # groups of columns of {roles: list, width: num, image: bool}
 role-tables:
-- - roles: [faculty, postdoc, staff]
+- - roles: [faculty, staff]
     width: 4
     image: true
   - roles: [grad]
     width: 8
     image: true
-- - roles: [collab, master, ugrad]
-    width: 5
+- - roles: [master]
+    width: 4
+    image: true
+  - roles: [postdoc]
+    width: 8
+    image: true
+  - roles: [collab]
+    width: 4
     image: false
   - roles: [alum]
-    width: 7
+    width: 8
     image: false
-
 ---
 
 <div class="jumbotron">
     <p>
-        Description of Field Lab
+        Welcome to the Field Lab! We are a research group at the Johns Hopkins University, affiliated with the Center for Language and Speech Processing. Our research sits at the intersection of natural language processing, social science, and ethics, with the broader goal of developing solutions to mitigate harms in technologies with societal impact, and critically examining how AI systems are developed and deployed.
     </p>
 </div>
 
-<section>
-    <h2>News</h2>
-    <ul class="news list-unstyled">
+<div class="row" style="margin-top:32px;">
+  <div class="col-md-6">
+    <section>
+      <h2>News</h2>
+      <ul class="news list-unstyled">
         {% for post in site.posts limit: site.front_page_news %}
-            {% include news-item.html item=post %}
+          {% include news-item.html item=post %}
         {% endfor %}
-    </ul>
-    {% assign numposts = site.posts | size %}
-    {% if numposts >= 1 %}
+      </ul>
+      {% assign numposts = site.posts | size %}
+      {% if numposts >= 1 %}
         <p>
-            <span class="fa fa-fw fa-history"></span>
-            <a href="{{ site.base }}/blog.html">Older posts&hellip;</a>
+          <span class="fa fa-fw fa-history"></span>
+          <a href="{{ site.base }}/blog.html">Older posts&hellip;</a>
         </p>
-    {% endif %}
-</section>
-
-<div id="publications">
-    <h2>Publications</h2>
-    {% include pubs.html %}
-    <p>
-        <a href="{{ site.base }}/bib/pubs.bib">Download BibTeX.</a>
-    </p>
+      {% endif %}
+    </section>
+  </div>
+  <div class="col-md-6 d-flex align-items-center justify-content-center">
+    <section id="logo-slideshow-section" style="width:100%; text-align: center;">
+      <div class="lab-slideshow swiper-container" style="max-width:600px; width:100%; margin:auto; position:relative; aspect-ratio:3/1; min-height:200px; background:#fff; display:flex; align-items:center; justify-content:center;">
+        <div class="swiper-wrapper" style="height:100%;">
+          <div class="swiper-slide" data-caption="Our lab's mascot!"><img src="/img/slideshow/luna.png" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
+          <div class="swiper-slide" data-caption="Luna leading our lab meeting."><img src="/img/slideshow/luna_in_lab_cropped.PNG" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
+        </div>
+        <div class="swiper-pagination" style="position:relative; bottom:-16px;"></div>
+        <div id="slideshow-caption" style="position:absolute; bottom:18px; right:18px; background:rgba(0,0,0,0.45); color:#fff; font-size:1em; padding:2px 10px; border-radius:4px; pointer-events:none; min-width:80px; text-align:right; z-index:2;"></div>
+        <style>
+          .swiper-button-prev, .swiper-button-next { display: none !important; }
+          .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            background: #bbb;
+            opacity: 0.5;
+            margin: 0 4px !important;
+          }
+          .swiper-pagination-bullet-active {
+            background: #333;
+            opacity: 0.9;
+          }
+        </style>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          function updateCaption() {
+            var slides = document.querySelectorAll('.lab-slideshow .swiper-slide');
+            var activeSlide = document.querySelector('.lab-slideshow .swiper-slide-active');
+            var caption = activeSlide ? activeSlide.getAttribute('data-caption') : '';
+            var captionBox = document.getElementById('slideshow-caption');
+            if (captionBox) captionBox.textContent = caption || '';
+          }
+          function attachSwiperListener() {
+            var swiperInstance = document.querySelector('.lab-slideshow').swiper;
+            if (swiperInstance) {
+              swiperInstance.on('slideChangeTransitionEnd', updateCaption);
+              updateCaption();
+            } else {
+              setTimeout(attachSwiperListener, 300);
+            }
+          }
+          attachSwiperListener();
+        });
+        </script>
+      </div>
+    </section>
+  </div>
 </div>
-
-<!-- <section>
-    <h2>Research</h2>
-    <div class="card-columns">
-        {% comment %}
-        Sort the projects by date, putting those without dates last
-        {% endcomment %}
-        {% assign projects_by_date = site.projects | sort: 'last-updated', 'first' %}
-        {% assign projects_by_date = projects_by_date | reverse %}
-        {% for p in projects_by_date %}
-            {% if p.status != "inactive" %}
-                {% include project-card.html project=p %}
-            {% endif %}
-        {% endfor %}
-    </div>
-</section> -->
 
 <div id="people">
     <h2>People</h2>
@@ -80,3 +112,17 @@ role-tables:
         </section>
     {% endfor %}
 </div>
+
+<div id="publications">
+    <h2>Publications</h2>
+    {% include pubs.html %}
+    <p>
+        <a href="{{ site.base }}/bib/pubs.bib">Download BibTeX.</a>
+    </p>
+</div>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<!-- Swiper JS (before </body>) -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="/js/slideshow.js"></script>

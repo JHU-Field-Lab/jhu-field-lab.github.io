@@ -1,5 +1,5 @@
 name: Field Lab
-url: http://field-lab.github.io
+url: http://jhu-field-lab.github.io
 
 exclude: [bibble, README.md, Makefile, screenshot.png]
 
@@ -17,14 +17,16 @@ roles:
     name: Graduate Students
   - key: master
     name: Master Students
-  - key: ugrad
-    name: Undergraduate Students
-  - key: ugrad-alum
-    name: Past Undergraduate Students
-  - key: collab
-    name: Collaborators
+  - key: postdoc
+    name: Postdocs
   - key: alum
     name: Alumni
+    #- key: ugrad
+  #  name: Undergraduate Students
+  #- key: ugrad-alum
+  #  name: Past Undergraduate Students
+  - key: collab
+    name: Collaborators
 
 # Number of news stories on the front page.
 front_page_news: 8
@@ -43,9 +45,7 @@ navigation:
     link: /
   - title: People
     link: /#people
-  - title: Research
-    link: /research.html
+  #- title: Research
+  #  link: /research.html
   - title: Publications
     link: /publications.html
-  - title: Code
-    link: /code.html
