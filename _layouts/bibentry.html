@@ -1,0 +1,45 @@
+<tr>
+  <td class="pub-year">
+    {% if entry.year and entry.year != prev.year %}
+      <strong>{{ entry.year }}</strong>
+    {% endif %}
+  </td>
+  <td class="publication">
+    <span class="pubtitle">
+      {% if entry.url %}
+        <img src="/img/pdf_icon.png" width="16" height="16" alt="PDF" />
+        <a href="{{ entry.url }}">{{ entry.title }}</a>.
+      {% else %}
+        {{ entry.title }}.
+      {% endif %}
+    </span><br />
+    <span class="authors">
+      {{ entry.author }}
+    </span><br />
+    <span class="venue">
+      {% if entry.eprint %}
+        arXiv Preprint
+      {% elsif entry.journal %}
+        {{ entry.journal }}
+      {% elsif entry.booktitle %}
+        {{ entry.booktitle }}
+      {% else %}
+        {{ entry.note }}
+      {% endif %}
+    </span>.<br />
+    <span class="links">
+      {% if entry.url %}
+        <a href="{{ entry.url }}" class="btn btn-sm btn-outline-secondary" target="_blank">PDF</a>
+      {% endif %}
+      {% if entry.code %}
+        <a href="{{ entry.code }}" class="btn btn-sm btn-outline-secondary" target="_blank">Code</a>
+      {% endif %}
+      {% if entry.project %}
+        <a href="{{ entry.project }}" class="btn btn-sm btn-outline-secondary" target="_blank">Project Page</a>
+      {% endif %}
+      {% if entry.data %}
+        <a href="{{ entry.data }}" class="btn btn-sm btn-outline-secondary" target="_blank">Dataset</a>
+      {% endif %}
+    </span>
+  </td>
+</tr>

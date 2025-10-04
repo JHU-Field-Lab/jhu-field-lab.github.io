@@ -1,5 +1,5 @@
 name: Field Lab
-url: http://jhu-field-lab.github.io
+url: https://jhu-field-lab.github.io
 
 exclude: [bibble, README.md, Makefile, screenshot.png]
 
@@ -21,10 +21,6 @@ roles:
     name: Postdocs
   - key: alum
     name: Alumni
-    #- key: ugrad
-  #  name: Undergraduate Students
-  #- key: ugrad-alum
-  #  name: Past Undergraduate Students
   - key: collab
     name: Collaborators
 
@@ -49,3 +45,20 @@ navigation:
   #  link: /research.html
   - title: Publications
     link: /publications.html
+  - title: GitHub 
+    link: https://github.com/JHU-Field-Lab
+
+# Plugins
+plugins:
+  - jekyll-scholar
+
+# Scholar settings
+scholar:
+  style: ieee
+  locale: en
+  source: ./bib
+  bibliography: pubs.bib
+  bibliography_template: bibentry
+  sort_by: year,month
+  order: descending
+  details_link: Details

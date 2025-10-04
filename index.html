@@ -52,47 +52,21 @@ role-tables:
   <div class="col-md-6 d-flex align-items-center justify-content-center">
     <section id="logo-slideshow-section" style="width:100%; text-align: center;">
       <div class="lab-slideshow swiper-container" style="max-width:600px; width:100%; margin:auto; position:relative; aspect-ratio:3/1; min-height:200px; background:#fff; display:flex; align-items:center; justify-content:center;">
+        <!-- Add these buttons inside the swiper container -->
+        <div class="swiper-button-prev" style="color:#000;"></div>
+<div class="swiper-button-next" style="color:#000;"></div>
+
         <div class="swiper-wrapper" style="height:100%;">
-          <div class="swiper-slide" data-caption="Our lab's mascot!"><img src="/img/slideshow/luna.png" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
-          <div class="swiper-slide" data-caption="Luna leading our lab meeting."><img src="/img/slideshow/luna_in_lab_cropped.PNG" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
+          {% for slide in site.data.slides %}
+          <div class="swiper-slide" data-caption="{{ slide.alt | escape }}" style="position:relative; display:flex; flex-direction:column; justify-content:flex-end; align-items:center;">
+              <img src="{{ slide.image | relative_url }}" alt="{{ slide.alt | escape }}" style="width:100%; height:auto; max-height:200px; object-fit:contain; display:block;">
+              <div class="swiper-caption" style="width:100%; background: rgba(0,0,0,0.5); color:#fff; padding:6px 8px; font-size:14px; text-align:center; box-sizing:border-box;">
+                 {{ slide.alt | escape }}
+              </div>
+          </div>
+
+          {% endfor %}
         </div>
-        <div class="swiper-pagination" style="position:relative; bottom:-16px;"></div>
-        <div id="slideshow-caption" style="position:absolute; bottom:18px; right:18px; background:rgba(0,0,0,0.45); color:#fff; font-size:1em; padding:2px 10px; border-radius:4px; pointer-events:none; min-width:80px; text-align:right; z-index:2;"></div>
-        <style>
-          .swiper-button-prev, .swiper-button-next { display: none !important; }
-          .swiper-pagination-bullet {
-            width: 8px;
-            height: 8px;
-            background: #bbb;
-            opacity: 0.5;
-            margin: 0 4px !important;
-          }
-          .swiper-pagination-bullet-active {
-            background: #333;
-            opacity: 0.9;
-          }
-        </style>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          function updateCaption() {
-            var slides = document.querySelectorAll('.lab-slideshow .swiper-slide');
-            var activeSlide = document.querySelector('.lab-slideshow .swiper-slide-active');
-            var caption = activeSlide ? activeSlide.getAttribute('data-caption') : '';
-            var captionBox = document.getElementById('slideshow-caption');
-            if (captionBox) captionBox.textContent = caption || '';
-          }
-          function attachSwiperListener() {
-            var swiperInstance = document.querySelector('.lab-slideshow').swiper;
-            if (swiperInstance) {
-              swiperInstance.on('slideChangeTransitionEnd', updateCaption);
-              updateCaption();
-            } else {
-              setTimeout(attachSwiperListener, 300);
-            }
-          }
-          attachSwiperListener();
-        });
-        </script>
       </div>
     </section>
   </div>
@@ -115,7 +89,7 @@ role-tables:
 
 <div id="publications">
     <h2>Publications</h2>
-    {% include pubs.html %}
+    {% bibliography limit=15 %}
     <p>
         <a href="{{ site.base }}/bib/pubs.bib">Download BibTeX.</a>
     </p>
