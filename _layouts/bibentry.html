@@ -15,10 +15,10 @@
     <span class="pubtitle">
       <img src="/img/pdf_icon.png" width="16" height="16" alt="PDF" />
       {% if pdf_url != "" %}
-        <a href="{{ pdf_url }}">{{ entry.title }}</a>.
+        <a href="{{ pdf_url }}">{{ entry.title }}</a>
       {% else %}
         {%- comment -%} No paper link yet: styled like a link, but goes nowhere. {%- endcomment -%}
-        <a class="deadlink">{{ entry.title }}</a>.
+        <a class="deadlink">{{ entry.title }}</a>
       {% endif %}
     </span><br />
     <span class="authors">
