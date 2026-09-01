@@ -3,14 +3,22 @@
 
 {% for role in site.roles %}
     {% if role.key == role-key %}
-        <h3 class="pt-3"> {{ role.name }} </h3>
-        <div class="role {{ role.key }}">
-            {% for item in site.data.people %}
-                {% assign person = item[1] %}
-                {% if person.role == role.key %}
-                    {% include person.html person=person image=include.image %}
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% assign role-count = 0 %}
+        {% for item in site.data.people %}
+            {% if item[1].role == role.key %}
+                {% assign role-count = role-count | plus: 1 %}
+            {% endif %}
+        {% endfor %}
+        {% if role-count > 0 %}
+            <h3 class="pt-3"> {{ role.name }} </h3>
+            <div class="role {{ role.key }}">
+                {% for item in site.data.people %}
+                    {% assign person = item[1] %}
+                    {% if person.role == role.key %}
+                        {% include person.html person=person image=include.image %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endif %}
 {% endfor %}

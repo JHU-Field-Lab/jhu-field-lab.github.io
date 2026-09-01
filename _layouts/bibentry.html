@@ -1,3 +1,10 @@
+{%- comment -%}
+  An empty `url = {}` in the .bib is a non-nil, empty string, which Liquid treats
+  as truthy -- so test the stripped value rather than `entry.url` itself,
+  otherwise such entries render a dead <a href="">.
+{%- endcomment -%}
+{%- assign pdf_url = entry.url | strip -%}
+
 <tr>
   <td class="pub-year">
     {% if entry.year and entry.year != prev.year %}
@@ -6,15 +13,27 @@
   </td>
   <td class="publication">
     <span class="pubtitle">
-      {% if entry.url %}
-        <img src="/img/pdf_icon.png" width="16" height="16" alt="PDF" />
-        <a href="{{ entry.url }}">{{ entry.title }}</a>.
+      <img src="/img/pdf_icon.png" width="16" height="16" alt="PDF" />
+      {% if pdf_url != "" %}
+        <a href="{{ pdf_url }}">{{ entry.title }}</a>.
       {% else %}
-        {{ entry.title }}.
+        {%- comment -%} No paper link yet: styled like a link, but goes nowhere. {%- endcomment -%}
+        <a class="deadlink">{{ entry.title }}</a>.
       {% endif %}
     </span><br />
     <span class="authors">
-      {{ entry.author }}
+      {%- comment -%} Render as "First Last, First Last, ..." {%- endcomment -%}
+      {%- for a in entry.author_array -%}
+        {%- unless forloop.first %}, {% endunless -%}
+        {%- if a.last == "others" -%}
+          et al.
+        {%- else -%}
+          {{- a.first }}{% if a.von and a.von != "" %} {{ a.von }}{% endif %} {{ a.last -}}
+          {%- if a.jr and a.jr != "" %} {{ a.jr }}{% endif -%}
+        {%- endif -%}
+      {%- else -%}
+        {{ entry.author }}
+      {%- endfor -%}
     </span><br />
     <span class="venue">
       {% if entry.eprint %}
@@ -28,8 +47,8 @@
       {% endif %}
     </span><br />
     <span class="links">
-      {% if entry.url %}
-        <a href="{{ entry.url }}" class="btn btn-sm btn-outline-secondary" target="_blank">PDF</a>
+      {% if pdf_url != "" %}
+        <a href="{{ pdf_url }}" class="btn btn-sm btn-outline-secondary" target="_blank">PDF</a>
       {% endif %}
       {% if entry.code %}
         <a href="{{ entry.code }}" class="btn btn-sm btn-outline-secondary" target="_blank">Code</a>

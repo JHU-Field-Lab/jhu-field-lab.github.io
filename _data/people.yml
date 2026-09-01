@@ -1,4 +1,3 @@
-
 prof-a:
     display_name: "Anjalie Field"
     webpage: "https://anjalief.github.io/"
@@ -17,6 +16,13 @@ grad-e:
     github: "jonathanivey"
     role: grad
     coadvised: "Co-advisor: Ziang Xiao"
+
+grad-f:
+    display_name: "Kaavya Chaparala"
+    webpage: "https://www.cs.jhu.edu/~kchapar1/"
+    # github: "username"
+    image: /img/people/placeholder.png
+    role: grad
 
 grad-a:
     display_name: "Krithika Ramesh"
@@ -38,6 +44,16 @@ grad-c:
     github: "zzhao71"
     role: grad
     coadvised: "Co-advisor: Yinzhi Cao"
+
+master-alum-f:
+    display_name: "Yaxuan Ren"
+    role: alum
+    bio: "MS @ JHU"
+
+master-alum-e:
+    display_name: "Sandesh Rangreji"
+    role: alum
+    bio: "MS @ JHU -> Walmart"
 
 master-alum-c:
     display_name: "Pristina Wang"
@@ -70,26 +86,17 @@ alum-a:
     bio: "PhD @ JHU"
 
 collab-a:
-    display_name: "Kaavya C"
+    display_name: "Aimee Liang"
+    webpage: "https://www.linkedin.com/in/aimee-liang~"
+    github: "aimeeliang26"
+    image: /img/people/aimeeliang.jpeg
     role: collab
-    bio: "PhD @ JHU"
 
 postdoc-a:
     display_name: "Katherine Van Koevering"
     role: postdoc
-    webpage: https://ktvank.github.io/
-    image: /img/people/katherinevankoevering.jpg"
-
-master-b:
-    display_name: "Sandesh Rangreji"
-    github: "https://github.com/SandeshRangreji"
-    image: /img/people/sandeshrangreji.jpeg
-    role: master
-
-master-a:
-    display_name: "Yaxuan Ren"
-    image: /img/people/ashleyren.jpg
-    role: master
+    webpage: "https://ktvank.github.io/"
+    image: /img/people/katherinevankoevering.jpg
 
 #ugrad-a:
 #    display_name: "Placeholder"

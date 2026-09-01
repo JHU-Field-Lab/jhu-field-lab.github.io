@@ -297,3 +297,19 @@ svg {
     }
   }
 }
+
+/* Papers with no URL yet: the title still looks like a link, but goes nowhere.
+   NB: don't scope this under .publication. jekyll-scholar wraps each entry in
+   <ol class="bibliography"><li>, so the <tr>/<td class="publication"> this
+   layout emits have no <table> ancestor and the browser drops those tags
+   entirely -- .publication never exists in the parsed DOM. The :not([href])
+   is what outweighs Bootstrap's a:not([href]):not([tabindex]){color:inherit}. */
+.pubtitle a.deadlink:not([href]) {
+    color: #007bff; // Bootstrap 4 default link colour
+    cursor: pointer;
+
+    &:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+}

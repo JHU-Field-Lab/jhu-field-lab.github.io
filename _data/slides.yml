@@ -1,8 +1,11 @@
+# NOTE: each `image` must exist under img/slideshow/ or the slide renders broken.
+- image: /img/slideshow/2025_emnlp.jpeg
+  alt: "Field Lab's annual pilgrimage to EMNLP, 2025 edition"
+- image: /img/slideshow/2025_emnlp.jpeg
+  alt: "Field Lab's annual pilgrimage to EMNLP, 2025 edition"
 - image: /img/slideshow/2025_semester-kickoff.jpg
   alt: "Kicking off the fall semester!"
 - image: /img/slideshow/2024_emnlp.jpg
   alt: "Field Lab at EMNLP 2024"
 - image: /img/slideshow/luna_in_lab_cropped.PNG
   alt: "Luna leading our lab meeting."
-- image: /img/slideshow/2024_xmas.jpg
-  alt: "Field Lab at the CS winter celebration, 2024"
