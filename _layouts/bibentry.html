@@ -1,64 +1,67 @@
 {%- comment -%}
+  One entry in the publication list.
+
+  jekyll-scholar wraps every entry in <ol class="bibliography"><li>, so whatever
+  this layout emits has to be valid inside an <li> -- table rows are silently
+  dropped by the browser there. Keep it to divs/spans.
+
   An empty `url = {}` in the .bib is a non-nil, empty string, which Liquid treats
-  as truthy -- so test the stripped value rather than `entry.url` itself,
-  otherwise such entries render a dead <a href="">.
+  as truthy -- so test the stripped value rather than `entry.url` itself.
 {%- endcomment -%}
 {%- assign pdf_url = entry.url | strip -%}
 
-<tr>
-  <td class="pub-year">
-    {% if entry.year and entry.year != prev.year %}
-      <strong>{{ entry.year }}</strong>
-    {% endif %}
-  </td>
-  <td class="publication">
-    <span class="pubtitle">
-      <img src="/img/pdf_icon.png" width="16" height="16" alt="PDF" />
-      {% if pdf_url != "" %}
-        <a href="{{ pdf_url }}">{{ entry.title }}</a>
-      {% else %}
-        {%- comment -%} No paper link yet: styled like a link, but goes nowhere. {%- endcomment -%}
-        <a class="deadlink">{{ entry.title }}</a>
-      {% endif %}
-    </span><br />
-    <span class="authors">
-      {%- comment -%} Render as "First Last, First Last, ..." {%- endcomment -%}
-      {%- for a in entry.author_array -%}
-        {%- unless forloop.first %}, {% endunless -%}
-        {%- if a.last == "others" -%}
-          et al.
-        {%- else -%}
-          {{- a.first }}{% if a.von and a.von != "" %} {{ a.von }}{% endif %} {{ a.last -}}
-          {%- if a.jr and a.jr != "" %} {{ a.jr }}{% endif -%}
-        {%- endif -%}
+{%- comment -%} Where it appeared: arXiv id for preprints, otherwise the venue. {%- endcomment -%}
+{%- assign venue_text = "" -%}
+{%- if entry.eprint -%}
+  {%- assign venue_text = "arXiv:" | append: entry.eprint -%}
+{%- elsif entry.journal -%}
+  {%- assign venue_text = entry.journal -%}
+{%- elsif entry.booktitle -%}
+  {%- assign venue_text = entry.booktitle -%}
+{%- else -%}
+  {%- assign venue_text = entry.note -%}
+{%- endif -%}
+
+<div class="pub">
+  <div class="pub-title">
+    {%- if pdf_url != "" -%}
+      <a href="{{ pdf_url }}">{{ entry.title }}</a>
+    {%- else -%}
+      {{ entry.title }}
+    {%- endif -%}
+  </div>
+
+  <div class="pub-authors">
+    {%- comment -%} Render as "First Last, First Last, ..." {%- endcomment -%}
+    {%- for a in entry.author_array -%}
+      {%- unless forloop.first %}, {% endunless -%}
+      {%- if a.last == "others" -%}
+        et al.
       {%- else -%}
-        {{ entry.author }}
-      {%- endfor -%}
-    </span><br />
-    <span class="venue">
-      {% if entry.eprint %}
-        arXiv Preprint
-      {% elsif entry.journal %}
-        {{ entry.journal }}
-      {% elsif entry.booktitle %}
-        {{ entry.booktitle }}
-      {% else %}
-        {{ entry.note }}
-      {% endif %}
-    </span><br />
-    <span class="links">
-      {% if pdf_url != "" %}
-        <a href="{{ pdf_url }}" class="btn btn-sm btn-outline-secondary" target="_blank">PDF</a>
-      {% endif %}
-      {% if entry.code %}
-        <a href="{{ entry.code }}" class="btn btn-sm btn-outline-secondary" target="_blank">Code</a>
-      {% endif %}
-      {% if entry.project %}
-        <a href="{{ entry.project }}" class="btn btn-sm btn-outline-secondary" target="_blank">Project Page</a>
-      {% endif %}
-      {% if entry.data %}
-        <a href="{{ entry.data }}" class="btn btn-sm btn-outline-secondary" target="_blank">Dataset</a>
-      {% endif %}
-    </span>
-  </td>
-</tr>
+        {{- a.first }}{% if a.von and a.von != "" %} {{ a.von }}{% endif %} {{ a.last -}}
+        {%- if a.jr and a.jr != "" %} {{ a.jr }}{% endif -%}
+      {%- endif -%}
+    {%- else -%}
+      {{ entry.author }}
+    {%- endfor -%}
+  </div>
+
+  {%- if venue_text and venue_text != "" %}<div class="pub-venue">{{ venue_text }}</div>{% endif -%}
+
+  {%- capture pub_links -%}
+    {%- if pdf_url != "" -%}
+      <a href="{{ pdf_url }}" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines"></i>Paper</a>
+    {%- endif -%}
+    {%- if entry.code -%}
+      <a href="{{ entry.code }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>Code</a>
+    {%- endif -%}
+    {%- if entry.data -%}
+      <a href="{{ entry.data }}" target="_blank" rel="noopener"><i class="fa-solid fa-database"></i>Data</a>
+    {%- endif -%}
+    {%- if entry.project -%}
+      <a href="{{ entry.project }}" target="_blank" rel="noopener"><i class="fa-solid fa-diagram-project"></i>Project page</a>
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- assign pub_links = pub_links | strip -%}
+  {%- if pub_links != "" %}<div class="pub-links">{{ pub_links }}</div>{% endif -%}
+</div>

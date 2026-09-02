@@ -14,7 +14,7 @@ roles:
   - key: faculty
     name: Faculty
   - key: grad
-    name: Graduate Students
+    name: PhD Students
   - key: master
     name: Master Students
   - key: postdoc
@@ -61,4 +61,6 @@ scholar:
   bibliography_template: bibentry
   sort_by: year,month
   order: descending
+  group_by: year
+  group_order: descending
   details_link: Details

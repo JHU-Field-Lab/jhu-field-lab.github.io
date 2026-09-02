@@ -1,7 +1,14 @@
 ---
 layout: default
 title: Publications
+notitle: true
 ---
 
-{% bibliography %}
-
+{% comment %}
+  The heading lives inside .publications so it lines up with the entry cards,
+  which are narrower than the Bootstrap container.
+{% endcomment %}
+<div class="publications publications-page">
+  <h1 class="pub-heading">Publications</h1>
+  {% bibliography %}
+</div>

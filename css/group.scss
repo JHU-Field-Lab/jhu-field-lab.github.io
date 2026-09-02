@@ -298,18 +298,218 @@ svg {
   }
 }
 
-/* Papers with no URL yet: the title still looks like a link, but goes nowhere.
-   NB: don't scope this under .publication. jekyll-scholar wraps each entry in
-   <ol class="bibliography"><li>, so the <tr>/<td class="publication"> this
-   layout emits have no <table> ancestor and the browser drops those tags
-   entirely -- .publication never exists in the parsed DOM. The :not([href])
-   is what outweighs Bootstrap's a:not([href]):not([tabindex]){color:inherit}. */
-.pubtitle a.deadlink:not([href]) {
-    color: #007bff; // Bootstrap 4 default link colour
-    cursor: pointer;
+/* ---------------------------------------------------------------- *
+ * Publications                                                     *
+ * ---------------------------------------------------------------- */
+
+$pub-navy: #003366;
+$pub-blue: #004080;
+$pub-border: #e6e9ef;
+
+/* The standalone page keeps a comfortable measure; the home-page section
+   inherits the container width of the News and People blocks above it. */
+.publications-page {
+    max-width: 860px;
+    margin: 0 auto 2.5rem;
+}
+
+.publications {
+
+    .pub-heading {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Year headings, emitted by jekyll-scholar's `group_by: year`. The year
+       sits on a hairline that fades out across the column. js/publications.js
+       folds each heading and its list into a collapsible <details>; these
+       styles also cover the plain, no-JS rendering. */
+    h2.bibliography {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.01em;
+        color: $pub-navy;
+        margin: 2.5rem 0 1rem;
+        transition: color 0.15s ease;
+
+        &::after {
+            content: "";
+            flex: 1 1 auto;
+            height: 1px;
+            background: linear-gradient(to right, #ccd4e0, rgba(204, 212, 224, 0));
+        }
+
+        &:first-of-type { margin-top: 1.5rem; }
+    }
+
+    details.pub-group {
+        > summary {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 2.5rem 0 1rem;
+            cursor: pointer;
+            list-style: none;   /* hide the default disclosure triangle */
+
+            &::-webkit-details-marker { display: none; }
+
+            /* Chevron: points right when closed, down when open. */
+            &::before {
+                content: "";
+                flex: none;
+                width: 0.45rem;
+                height: 0.45rem;
+                margin-bottom: 0.15rem;
+                border-right: 2px solid #97a3b4;
+                border-bottom: 2px solid #97a3b4;
+                transform: rotate(-45deg);
+                transition: transform 0.18s ease, border-color 0.15s ease;
+            }
+
+            /* The hairline runs from the year to the right edge. */
+            &::after {
+                content: "";
+                flex: 1 1 auto;
+                height: 1px;
+                background: linear-gradient(to right, #ccd4e0, rgba(204, 212, 224, 0));
+            }
+
+            /* The heading keeps its semantics but hands its layout to the row. */
+            h2.bibliography {
+                flex: none;
+                margin: 0;
+
+                &::after { content: none; }
+            }
+
+            &:hover {
+                h2.bibliography { color: $pub-blue; }
+
+                &::before { border-color: $pub-blue; }
+            }
+        }
+
+        &[open] > summary::before {
+            transform: rotate(45deg);
+            margin-bottom: 0;
+        }
+
+        &:first-of-type > summary { margin-top: 1.5rem; }
+    }
+
+    ol.bibliography {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        > li {
+            list-style: none;
+            margin-bottom: 0.7rem;
+        }
+    }
+}
+
+.pub {
+    position: relative;
+    overflow: hidden;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid $pub-border;
+    border-radius: 10px;
+    background: #fff;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
+
+    /* Accent bar that slides in on hover. */
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: $pub-blue;
+        opacity: 0;
+        transition: opacity 0.18s ease;
+    }
 
     &:hover {
-        color: #0056b3;
-        text-decoration: underline;
+        border-color: #d5dce6;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+
+        &::before { opacity: 1; }
+    }
+
+    .pub-title {
+        font-size: 1.02rem;
+        font-weight: 600;
+        line-height: 1.35;
+        color: #1b1f24;
+
+        a {
+            color: #1b1f24;
+            text-decoration: none;
+
+            &:hover {
+                color: $pub-blue;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .pub-authors {
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #545c66;
+    }
+
+    .pub-venue {
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        font-style: italic;
+        color: #6b737d;
+    }
+
+    .pub-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.7rem;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4em;
+            padding: 0.22em 0.7em;
+            border: 1px solid #d8dee7;
+            border-radius: 999px;
+            background: #fff;
+            color: #46505f;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+            &:hover {
+                background: $pub-blue;
+                border-color: $pub-blue;
+                color: #fff;
+            }
+
+            i {
+                font-size: 0.9em;
+                color: inherit;
+            }
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .pub {
+        padding: 0.8rem 0.85rem;
+
+        .pub-title { font-size: 0.98rem; }
     }
 }
